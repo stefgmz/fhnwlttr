@@ -1,0 +1,37 @@
+\documentclass
+[
+%priority=B,
+fhnw
+]
+{scrlttr2}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{lipsum}
+
+\LoadLetterOption{personalinfo}
+
+
+\setkomavar{subject}{Einladung}
+	
+\begin{document}
+
+\begin{letter}
+	{Dr.~Walter Christoph Ente\\
+	W.C.~Ente AG\\
+	Hauptstra\ss{}e 1\\
+%	Postfach\\
+	12345 Entenhausen\\
+	Entenuniversum%
+	}
+	\opening{Sehr geehrter Herr Dr.~W.C.~Ente,}
+	\lipsum[36]
+	\lipsum[10]
+%	\lipsum[10]
+%	\lipsum[10]
+	\closing{Freundliche Gr\"usse}
+\end{letter}
+
+\end{document}

@@ -1,0 +1,10 @@
+\ProvidesFile{myinfo.lco}[]
+
+
+\setkomavar{fromname}{Gyro Gearloose}
+%\setkomavar{signature}{G. Gearloose}
+\setkomavar{fromphone}{+313\,00\,000\,00\,00}
+%\setkomavar{division}{math}	% options: math, cs
+\setkomavar{fromemail}{gg@prominente.ent}
+\setkomavar{fromurl}{www.fhnw.ch}
+\setkomavar{funktion}{Wissenschaftlicher Mitarbeiter}

@@ -1,0 +1,166 @@
+%----------------------------------------------------------------------
+%% fhnw.lco
+%% Copyright 2020 Stefan Schmid
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Stefan Schmid.
+%
+% This work consists of this file only.
+%----------------------------------------------------------------------
+
+
+\ProvidesFile{unibas.lco}[%
+	2020/03/07 v1.0a LaTeX2e letter class options for FHNW]
+
+
+\@ifclassloaded{scrlttr2}{}{%
+	\GenericWarning{%
+		(infoblck.lco)\@spaces\@spaces\@spaces\@spaces\@spaces\@spaces%
+	}{%
+		Letter-class-option fhnw Warning:\space
+		This letter class option file was made\MessageBreak
+		only to be used with KOMA-Script letter\MessageBreak
+		class `scrlttr2'. Use with other classes\MessageBreak
+		may result in a lot of errors\@gobble
+	}%
+}
+
+
+% Allgemeine Klassenoptionen
+\KOMAoptions{%
+	foldmarks=off,		% keine Striche zum Falten
+	fontsize=11pt,		% Schriftgroesse
+	parskip=full,		% Absaetze mit leerer Zeile trennen
+	refline=dateleft,	% Ort und Datum linksb\"undig
+	backaddress=false,% Keine Ruecksendeadresse im Fenster
+}
+
+
+%\RequirePackage{babel}%
+\usepackage[reset,left=24mm,right=20mm,textheight=220mm,textwidth=165mm,top=42.5mm]{geometry}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{lastpage}
+\usepackage{ifthen}
+\usepackage{pdftexcmds}
+
+\LetterOptionNeedsPapersize{COMPARAT}{a4}
+
+
+% new variables
+\newkomavar{frominstitute}
+\newkomavar{fromdepartment}
+\newkomavar{fromschool}
+\newkomavar{fromaddr}
+\newkomavar{funktion}
+%\newkomavar{farbklammer}
+
+
+%\setlength{\oddsidemargin}{-8pt}
+
+\setkomavar{backaddress}{\parbox{60mm}{\fontsize{6}{1em}\selectfont \usekomavar{frominstitute}\\Hofackkerstrasse 30, 4132 Muttenz}}
+\renewcommand{\raggedsignature}{\raggedright} % make the signature ragged right
+\setkomavar{place}{Muttenz}
+\setkomavar{date}{\today}
+
+% set variables according to language
+\AtBeginDocument{
+	\@ifpackagewith{babel}{english}{%
+		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{20mm}\hspace*{17.5mm}\includegraphics{fhnw_habg_en_10mm.eps}}}%
+		\setkomavar{frominstitute}{Institute of Geomatics}%
+		\setkomavar{fromschool}{HABG}%
+		\setkomavar{fromaddr}{Hofackerstrasse 30\\4132 Muttenz\\Switzerland}%
+	}{}%
+	\@ifpackagewith{babel}{ngerman}{%
+		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{27mm}\hspace*{17.5mm}\includegraphics{fhnw_habg_10mm.eps}}}%
+		\setkomavar{frominstitute}{Institut Geomatik}%
+		\setkomavar{fromschool}{HABG}%
+		\setkomavar{fromaddr}{Hofackerstrasse 30\\4132 Muttenz}%
+	}{}
+}
+
+\@setplength{firstheadhpos}{10mm}	% 9mm im dotx?
+\@setplength{firstheadvpos}{10mm}
+
+\@setplength{backaddrheight}{10mm}
+\@setplength{toaddrindent}{0mm}
+
+\@setplength{refaftervskip}{3\baselineskip}
+
+
+\@setplength{toaddrvpos}{35mm}
+%\@setplength{toaddrhpos}{\dimexpr \oddsidemargin+1in-1mm\relax}
+\@setplength{toaddrhpos}{24mm}
+\@setplength{firstfoothpos}{\dimexpr \oddsidemargin+1in\relax}	% 9mm im docx
+\@setplength{firstfootvpos}{278.5mm}
+\@addtoplength{refvpos}{-12mm}
+%\@setplength{refvpos}{70mm}
+\@setplength{subjectbeforevskip}{-5pt}
+\@setplength{subjectaftervskip}{\baselineskip}
+
+\setkomavar{signature}{\usekomavar{fromname}\\\usekomavar{funktion}}
+
+% Add some extra space before closing
+\let\oclose\closing
+\renewcommand{\closing}[1]{\vspace{.5\baselineskip}\oclose{#1}}
+
+%\RequirePackage{etoolbox}
+%\newbool{klammer}
+%%\DeclareOption{klammer}{\booltrue{klammer}}
+%%\ProcessOptions\relax
+%\ifbool{klammer}{%
+%    \RequirePackage{background}}{}
+
+
+%\setkomavar{farbklammer}{true}
+%\usekomavar[\ifstr]{farbklammer}{true}{%
+%\usepackage[placement=center,opacity=1]{background}%
+%\SetBgScale{1}%
+%\SetBgAngle{0}%
+%\SetBgColor{ycolor}%
+%\SetBgContents{\rule{2cm}{5cm}}%
+%\SetBgHshift{-9.5cm}%
+%}{}
+
+% Logo top left of each page
+\pagestyle{headings}
+\firsthead{}
+\nexthead{}
+\AtBeginDocument{%
+  \AddToShipoutPicture{%
+  \AtPageUpperLeft{\usekomavar{fromlogo}}%
+  }%
+}
+
+% Infos in the first footer
+\firstfoot{%
+	\fontsize{8}{1em}\selectfont%
+	%\footnotesize%
+	\parbox[t][25mm]{53.5mm}{%
+	\usekomavar{frominstitute}}%
+	\parbox[t][25mm]{34mm}{%
+	\usekomavar{fromaddr}}%
+	\parbox[t][25mm]{29.9mm}{%
+	T \usekomavar{fromphone}}%
+	\parbox[t][25mm]{47.36mm}{%
+	\usekomavar{fromemail}\\\usekomavar{fromurl}}%
+}
+
+% Footer Zeigt ab Seite 2 nur "Seite X/Gesamt"
+\nextfoot{\parbox{20mm}{\vspace{5mm}\normalfont Seite \thepage/\pageref{LastPage}}}
+
+% Schriftart Arial
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+
+\definecolor{ycolor}{RGB}{240,240,20} % FHNW gelb
+
