@@ -141,6 +141,20 @@
   }%
 }
 
+% Farbklammer
+\newkomavar{colorstaple}
+%\setkomavar{colorstaple}{true}
+\newcommand{\mytoggle}[1]{\csname if#1\endcsname}
+\usekomavar[\mytoggle]{colorstaple}
+	\usepackage[placement=center,opacity=1]{background}%
+	\SetBgScale{1}%
+	\SetBgAngle{0}%
+	\SetBgColor{ycolor}%
+	\SetBgContents{\rule{1.8cm}{8.65cm}}%
+	\SetBgHshift{-9.6cm}%
+\fi
+
+
 % Infos in the first footer
 \firstfoot{%
 	\fontsize{8}{1em}\selectfont%
