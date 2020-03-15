@@ -18,7 +18,7 @@
 %----------------------------------------------------------------------
 
 
-\ProvidesFile{unibas.lco}[%
+\ProvidesFile{fhnw.lco}[%
 	2020/03/07 v1.0a LaTeX2e letter class options for FHNW]
 
 
@@ -45,27 +45,20 @@
 }
 
 
-%\RequirePackage{babel}%
-\usepackage[reset,left=24mm,right=20mm,textheight=220mm,textwidth=165mm,top=42.5mm]{geometry}
+\usepackage[reset,left=24mm,right=20mm,textheight=220mm,top=42.5mm]{geometry}
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{lastpage}
 \usepackage{ifthen}
-\usepackage{pdftexcmds}
 
 \LetterOptionNeedsPapersize{COMPARAT}{a4}
-
 
 % new variables
 \newkomavar{frominstitute}
 \newkomavar{fromdepartment}
 \newkomavar{fromschool}
 \newkomavar{fromaddr}
-\newkomavar{funktion}
-%\newkomavar{farbklammer}
-
-
-%\setlength{\oddsidemargin}{-8pt}
+\newkomavar{position}
 
 \setkomavar{backaddress}{\parbox{60mm}{\fontsize{6}{1em}\selectfont \usekomavar{frominstitute}\\Hofackkerstrasse 30, 4132 Muttenz}}
 \renewcommand{\raggedsignature}{\raggedright} % make the signature ragged right
@@ -75,13 +68,13 @@
 % set variables according to language
 \AtBeginDocument{
 	\@ifpackagewith{babel}{english}{%
-		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{20mm}\hspace*{17.5mm}\includegraphics{fhnw_habg_en_10mm.eps}}}%
+		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{20mm}\hspace*{17.3mm}\includegraphics{fhnw_habg_en_10mm.eps}}}%
 		\setkomavar{frominstitute}{Institute of Geomatics}%
 		\setkomavar{fromschool}{HABG}%
 		\setkomavar{fromaddr}{Hofackerstrasse 30\\4132 Muttenz\\Switzerland}%
 	}{}%
 	\@ifpackagewith{babel}{ngerman}{%
-		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{27mm}\hspace*{17.5mm}\includegraphics{fhnw_habg_10mm.eps}}}%
+		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{27mm}\hspace*{17.3mm}\includegraphics{fhnw_habg_10mm.eps}}}%
 		\setkomavar{frominstitute}{Institut Geomatik}%
 		\setkomavar{fromschool}{HABG}%
 		\setkomavar{fromaddr}{Hofackerstrasse 30\\4132 Muttenz}%
@@ -107,29 +100,12 @@
 \@setplength{subjectbeforevskip}{-5pt}
 \@setplength{subjectaftervskip}{\baselineskip}
 
-\setkomavar{signature}{\usekomavar{fromname}\\\usekomavar{funktion}}
+\setkomavar{signature}{\usekomavar{fromname}\\\usekomavar{position}}
 
 % Add some extra space before closing
 \let\oclose\closing
 \renewcommand{\closing}[1]{\vspace{.5\baselineskip}\oclose{#1}}
 
-%\RequirePackage{etoolbox}
-%\newbool{klammer}
-%%\DeclareOption{klammer}{\booltrue{klammer}}
-%%\ProcessOptions\relax
-%\ifbool{klammer}{%
-%    \RequirePackage{background}}{}
-
-
-%\setkomavar{farbklammer}{true}
-%\usekomavar[\ifstr]{farbklammer}{true}{%
-%\usepackage[placement=center,opacity=1]{background}%
-%\SetBgScale{1}%
-%\SetBgAngle{0}%
-%\SetBgColor{ycolor}%
-%\SetBgContents{\rule{2cm}{5cm}}%
-%\SetBgHshift{-9.5cm}%
-%}{}
 
 % Logo top left of each page
 \pagestyle{headings}
@@ -142,17 +118,20 @@
 }
 
 % Farbklammer
-\newkomavar{colorstaple}
-%\setkomavar{colorstaple}{true}
-\newcommand{\mytoggle}[1]{\csname if#1\endcsname}
-\usekomavar[\mytoggle]{colorstaple}
-	\usepackage[placement=center,opacity=1]{background}%
-	\SetBgScale{1}%
-	\SetBgAngle{0}%
-	\SetBgColor{ycolor}%
-	\SetBgContents{\rule{1.8cm}{8.65cm}}%
-	\SetBgHshift{-9.6cm}%
-\fi
+%TODO ifnotdefined farbklammer...
+\RequirePackage[contents={}]{background}%
+\newkomavar{farbklammer}
+\AtBeginDocument{
+	\newcommand*{\mytoggle}[1]{\csname if#1\endcsname}
+	\usekomavar[\mytoggle]{farbklammer}
+		\SetBgOpacity{1}%
+		\SetBgScale{1}%
+		\SetBgAngle{0}%
+		\SetBgColor{ycolor}%
+		\SetBgContents{\rule{1.8cm}{8.65cm}}%
+		\SetBgHshift{-9.6cm}%
+	\fi
+}
 
 
 % Infos in the first footer
@@ -169,12 +148,14 @@
 	\usekomavar{fromemail}\\\usekomavar{fromurl}}%
 }
 
-% Footer Zeigt ab Seite 2 nur "Seite X/Gesamt"
+% Infos in footer starting at page 2 as "Seite X/Gesamt"
+%TODO English version
 \nextfoot{\parbox{20mm}{\vspace{5mm}\normalfont Seite \thepage/\pageref{LastPage}}}
 
-% Schriftart Arial
+% CD default typeface Arial
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{helvet}
 
-\definecolor{ycolor}{RGB}{240,240,20} % FHNW gelb
+% Yellow color of FHNW
+\definecolor{ycolor}{RGB}{253,231,14}
 
