@@ -75,7 +75,7 @@
 	}{}%
 	\@ifpackagewith{babel}{ngerman}{%
 		\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{27mm}\hspace*{17.3mm}\includegraphics{fhnw_habg_10mm.eps}}}%
-		\setkomavar{frominstitute}{Institut Geomatik}%
+		\setkomavar{frominstitute}{Institut f\"ur Geomatik}%
 		\setkomavar{fromschool}{HABG}%
 		\setkomavar{fromaddr}{Hofackerstrasse 30\\4132 Muttenz}%
 	}{}
