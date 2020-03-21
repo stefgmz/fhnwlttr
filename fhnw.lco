@@ -45,11 +45,17 @@
 }
 
 
-\usepackage[reset,left=24mm,right=20mm,textheight=220mm,top=42.5mm]{geometry}
-\usepackage{graphicx}
-\usepackage{eso-pic}
-\usepackage{lastpage}
-\usepackage{ifthen}
+\RequirePackage[reset,left=24mm,right=20mm,textheight=220mm,top=42.5mm]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{eso-pic}
+\RequirePackage{lastpage}
+\RequirePackage{ifthen}
+\RequirePackage{etoolbox}
+\RequirePackage{stringstrings}
+\RequirePackage[contents={}]{background}%
+\RequirePackage{helvet}
+\RequirePackage{enumitem}
+\RequirePackage{calc}
 
 \LetterOptionNeedsPapersize{COMPARAT}{a4}
 
@@ -61,34 +67,27 @@
 \newkomavar{position}
 
 
-\setkomavar{backaddress}{\parbox{60mm}{\fontsize{6}{1em}\selectfont \usekomavar{frominstitute}\\Hofackerstrasse 30, 4132 Muttenz}}
 \renewcommand{\raggedsignature}{\raggedright} % make the signature ragged right
 \setkomavar{date}{\today}
 
 
-\newcommand{\includelogohelper}[1]{%
-\includegraphics{#1}\endgroup}
-
 \ifkomavarempty{fromschool}{\setkomavar{fromschool}{habg}}{}
 % set variables according to language
-\usepackage{etoolbox}
-\usepackage{stringstrings}
 \AtEndPreamble{
 %\AtBeginDocument{
 	\caselower[q]{\csname scr@fromschool@var\endcsname}
 	\@ifpackagewith{babel}{english}{%
 		\def\logoname{fhnw_\thestring_e_10mm}%
-		\setkomavar{frominstitute}{Institute of Geomatics}%
 		\setkomavar{fromaddr}{\usekomavar{fromstreet}\\\usekomavar{fromzipcode} \usekomavar{place}\\Switzerland}%
 	}{}%
 	\@ifpackagewith{babel}{ngerman}{%
 		\def\logoname{fhnw_\thestring_10mm}%
-		\setkomavar{frominstitute}{Institut Geomatik}%
 		\setkomavar{fromaddr}{\usekomavar{fromstreet}\\\usekomavar{fromzipcode} \usekomavar{place}}%
 	}{}
 	\setkomavar{fromlogo}{\parbox{\paperwidth}{\vspace*{27mm}\hspace*{17.2mm}\includegraphics{\logoname}}}%
 }
 
+% Set some lengths regarding page layout
 \@setplength{firstheadhpos}{10mm}	% 9mm im dotx?
 \@setplength{firstheadvpos}{10mm}
 
@@ -96,7 +95,6 @@
 \@setplength{toaddrindent}{0mm}
 
 \@setplength{refaftervskip}{3\baselineskip}
-
 
 \@setplength{toaddrvpos}{35mm}
 %\@setplength{toaddrhpos}{\dimexpr \oddsidemargin+1in-1mm\relax}
@@ -126,10 +124,8 @@
 }
 
 % Farbklammer
-%TODO ifnotdefined farbklammer...
 \newkomavar{farbklammer}
 \ifkomavarempty{farbklammer}{\setkomavar{farbklammer}{false}}{}
-\RequirePackage[contents={}]{background}%
 \AtBeginDocument{
 	\newcommand*{\mytoggle}[1]{\csname if#1\endcsname}
 	\usekomavar[\mytoggle]{farbklammer}
@@ -162,13 +158,10 @@
 
 % CD default typeface Arial
 \renewcommand{\familydefault}{\sfdefault}
-\usepackage{helvet}
 
 % Yellow color of FHNW
 \definecolor{ycolor}{RGB}{253,231,14}
 
-\RequirePackage{enumitem}
-\RequirePackage{calc}
 \setlist[itemize]{label=--}
 %TODO this does not work when the enumeration reaches 2 digits
 \setenumerate{leftmargin=*}
