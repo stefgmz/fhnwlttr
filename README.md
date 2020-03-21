@@ -1,10 +1,9 @@
-# Letter class option file for letters from the Institute of Geomatics at the University of Applied Sciences and Arts Northwestern Switzerland
+# Letter class option file for letters from the University of Applied Sciences and Arts Northwestern Switzerland
 
 ## Information
-This is an lco file for letters from the Institute of Geomatics
-at the FHNW. The layout of the
+This is an lco file for letters from the FHNW. The layout of the
 letter is based on the offical .dotx file from the corporate design
-page. (This includes logo, margins, footer,enumeration,...)
+page. (This includes logo, margins, footer, enumerations,...)
 
 ## Maintainer
 - Stefan Schmid
@@ -15,12 +14,12 @@ page. (This includes logo, margins, footer,enumeration,...)
 ## Personal information for letters
 Put all your personal information (name, e-mail, telephone number, ...)
 in the 'personalinfo.lco' file.
-For the right division/Fachbereich set division variable in this file
-to either IGEO or IGEO. If no value is set, then the division is not
-shown in the output.
+To load the right logo set fromschool variable in this file
+to one of the schools of the university.
+If no value is set, it defaults to HABG.
 
 ## Language options
 The language of the letter depends on the language which is loaded
 with the babel package. If both, English and German, are loaded,
-then the language will default to German.
+then the language defaults to German.
 
