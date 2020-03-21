@@ -5,6 +5,9 @@
 %\setkomavar{signature}{G. Gearloose}
 \setkomavar{fromphone}{+313\,00\,000\,00\,00}
 %\setkomavar{division}{IGEO}	% options: IGEO
-\setkomavar{fromemail}{gg@prominente.ent}
+\setkomavar{fromemail}{gg@prominente.nt}
 \setkomavar{fromurl}{www.fhnw.ch}
 \setkomavar{position}{Wissenschaftlicher Mitarbeiter}	% Position/Funktion
+\setkomavar{place}{Muttenz}
+\setkomavar{fromzipcode}{4132}
+\setkomavar{fromstreet}{Hofackerstrasse 30}

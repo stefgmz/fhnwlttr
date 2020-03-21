@@ -4,7 +4,7 @@
 This is an lco file for letters from the Institute of Geomatics
 at the FHNW. The layout of the
 letter is based on the offical .dotx file from the corporate design
-page. (This includes logo, margins, footer,...)
+page. (This includes logo, margins, footer,enumeration,...)
 
 ## Maintainer
 - Stefan Schmid
